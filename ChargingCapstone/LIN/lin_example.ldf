@@ -1,0 +1,151 @@
+LIN_description_file ;
+LIN_protocol_version = "2.1" ;
+LIN_language_version = "2.1" ;
+LIN_speed = 19.200 kbps ;
+Nodes {
+    Master:LinMaster,10.0000 ms,0.1000 ms ;
+    Slaves:Node1,Node2;
+}
+Signals {
+    Node1_Wr_Enable:1,0x0,LinMaster,Node1;
+    Node1_Wr_DutyCycle:8,0x00,LinMaster,Node1;
+    Node1_Wr_Freq:8,0x00,LinMaster,Node1;
+    Node1_Rd_Temp:16,0x00,Node1,LinMaster;
+    Node1_Rd_Pressure:8,0x00,Node1,LinMaster;
+    Node1_Rd_Speed:16,0x00,Node1,LinMaster;
+    Node1_Rd_DiagnosticCode:8,0xFF,Node1,LinMaster;
+    Node1_Error:1,0x0,Node1,LinMaster;
+    Node2_Wr_Enable:1,0x0,LinMaster,Node2;
+    Node2_Wr_Freq:8,0x00,LinMaster,Node2;
+    Node2_Wr_Speed:8,0x00,LinMaster,Node2;
+    Node2_Rd_Speed:8,0x00,Node2,LinMaster;
+    Node2_Rd_Temp:8,0x00,Node2,LinMaster;
+    Node2_Rd_Pressure:8,0x00,Node2,LinMaster;
+    Node2_Rd_DiagnosticCode:8,0xFF,Node2,LinMaster;
+    Node2_Error:1,0x0,Node2,LinMaster;
+}
+Diagnostic_signals {
+    MasterReqB0:8,0;
+    MasterReqB1:8,0;
+    MasterReqB2:8,0;
+    MasterReqB3:8,0;
+    MasterReqB4:8,0;
+    MasterReqB5:8,0;
+    MasterReqB6:8,0;
+    MasterReqB7:8,0;
+    SlaveRespB0:8,0;
+    SlaveRespB1:8,0;
+    SlaveRespB2:8,0;
+    SlaveRespB3:8,0;
+    SlaveRespB4:8,0;
+    SlaveRespB5:8,0;
+    SlaveRespB6:8,0;
+    SlaveRespB7:8,0;
+}
+Frames {
+    Node1_Control:0x11,LinMaster,3{
+        Node1_Wr_Enable,0;
+        Node1_Wr_Freq,16;
+        Node1_Wr_DutyCycle,8;
+    }
+    Node2_Control:0x12,LinMaster,3{
+        Node2_Wr_Enable,0;
+        Node2_Wr_Freq,8;
+        Node2_Wr_Speed,16;
+    }
+    Node1_Rd:0x21,Node1,7{
+        Node1_Rd_Temp,0;
+        Node1_Rd_Pressure,16;
+        Node1_Rd_Speed,24;
+        Node1_Rd_DiagnosticCode,40;
+        Node1_Error,48;
+    }
+    Node2_Rd:0x22,Node2,5{
+        Node2_Rd_Speed,0;
+        Node2_Rd_Temp,8;
+        Node2_Rd_Pressure,16;
+        Node2_Rd_DiagnosticCode,24;
+        Node2_Error,32;
+    }
+}
+Sporadic_frames {
+    control:Node1_Control,Node2_Control;
+ }
+Diagnostic_frames {
+    MasterReq : 60 {
+        MasterReqB0,0;
+        MasterReqB1,8;
+        MasterReqB2,16;
+        MasterReqB3,24;
+        MasterReqB4,32;
+        MasterReqB5,40;
+        MasterReqB6,48;
+        MasterReqB7,56;
+    }
+    SlaveResp : 61 {
+        SlaveRespB0,0;
+        SlaveRespB1,8;
+        SlaveRespB2,16;
+        SlaveRespB3,24;
+        SlaveRespB4,32;
+        SlaveRespB5,40;
+        SlaveRespB6,48;
+        SlaveRespB7,56;
+    }
+}
+Node_attributes {
+    Node1 {
+        LIN_protocol = 2.1 ;
+        configured_NAD = 0x01 ;
+        initial_NAD = 0x01 ;
+        product_id = 0x0001, 0x4000, 1 ;
+        response_error = Node1_Error ;
+        P2_min = 100.0000 ms ;
+        ST_min = 0.1000 ms ;
+        N_As_timeout = 100.0000 ms ;
+        N_Cr_timeout = 100.0000 ms ;
+        configurable_frames {
+            Node1_Control;
+            Node1_Rd;
+        }
+    }
+    Node2 {
+        LIN_protocol = 2.1 ;
+        configured_NAD = 0x02 ;
+        initial_NAD = 0x02 ;
+        product_id = 0x0001, 0x4000, 1 ;
+        response_error = Node2_Error ;
+        P2_min = 100.0000 ms ;
+        ST_min = 0.1000 ms ;
+        N_As_timeout = 100.0000 ms ;
+        N_Cr_timeout = 100.0000 ms ;
+        configurable_frames {
+            Node2_Rd;
+            Node2_Control;
+        }
+    }
+}
+Schedule_tables {
+    Read_Schedule {
+        Node1_Rd delay 20.0000 ms ;
+        Node2_Rd delay 20.0000 ms ;
+        Node1_Control delay 10.0000 ms ;
+        Node2_Control delay 10.0000 ms ;
+        MasterReq delay 20.0000 ms ;
+        SlaveResp delay 20.0000 ms ;
+    }
+}
+Signal_groups {
+}
+Signal_encoding_types {
+    TempC_byte {
+        physical_value,0,250,0.5000, -40.0000 ;
+    }
+    TempC_2byte {
+        physical_value,0,25000,0.05000, -40.0000 ;
+    }
+}
+Signal_representation {
+    TempC_byte:Node2_Rd_Temp;
+    TempC_2byte:Node1_Rd_Temp;
+}

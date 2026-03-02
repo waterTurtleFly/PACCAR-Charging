@@ -1,0 +1,104 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_:
+
+
+BO_ 1911 ExampleMsgTx: 8 Vector__XXX
+ SG_ Enable : 0|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ EngineSpeed : 15|16@0+ (0.1,0) [0|6500] "rpm" Vector__XXX
+ SG_ EngineTemperature : 31|16@0+ (0.01,-40) [4294967256|500] "degC" Vector__XXX
+
+BO_ 2147488308 ExampleMsgRx: 8 Vector__XXX
+ SG_ CountUpByValue : 7|16@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147484425 ExampleMsgTxExtended: 8 Vector__XXX
+ SG_ Enable : 0|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ EngineSpeed : 15|16@0+ (0.1,0) [0|6500] "rpm" Vector__XXX
+ SG_ EngineTemperature : 31|16@0+ (0.01,-40) [4294967256|500] "degC" Vector__XXX
+
+BO_ 2151682048 TestJ1939: 8 Vector__XXX
+ SG_ TestingTheRouter : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2151686144 MoreJ1939Testing: 8 Vector__XXX
+ SG_ EvenMoreTesting : 0|32@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2152005632 EvenMoreJ1939Testing: 8 Vector__XXX
+ SG_ TestTheRouter : 0|16@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 1280 TestNetwork: 8 Vector__XXX
+ SG_ Lots_of_Testing : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147527629 MoreNetworkTesting: 8 Vector__XXX
+ SG_ TestAllTheThings : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147491875 EvenMoreNetworkTesting: 8 Vector__XXX
+ SG_ CoolTestBro : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+
+
+
+CM_ BO_ 1911 "Example message";
+CM_ SG_ 1911 EngineSpeed "";
+CM_ BO_ 2147488308 "Example message";
+CM_ BO_ 2147484425 "Example message";
+CM_ SG_ 2147484425 EngineSpeed "";
+BA_DEF_ BO_  "VFrameFormat" ENUM  "StandardCAN","ExtendedCAN","reserved","J1939PG";
+BA_DEF_ BO_  "Network" STRING ;
+BA_DEF_ BO_  "Direction" STRING ;
+BA_DEF_DEF_  "VFrameFormat" "J1939PG";
+BA_DEF_DEF_  "Network" "ALL_CAN";
+BA_DEF_DEF_  "Direction" "";
+BA_ "VFrameFormat" BO_ 1911 0;
+BA_ "VFrameFormat" BO_ 2147488308 1;
+BA_ "VFrameFormat" BO_ 2147484425 1;
+BA_ "VFrameFormat" BO_ 2151682048 3;
+BA_ "Network" BO_ 2151682048 "JNode1,JNode2,JNode1,JNode3";
+BA_ "Direction" BO_ 2151682048 "Gateway Message";
+BA_ "VFrameFormat" BO_ 2151686144 3;
+BA_ "Network" BO_ 2151686144 "JNode2,JNode1,JNode2,JNode3";
+BA_ "Direction" BO_ 2151686144 "Gateway Message";
+BA_ "VFrameFormat" BO_ 2152005632 3;
+BA_ "Network" BO_ 2152005632 "JNode3,JNode1,JNode3,JNode2";
+BA_ "Direction" BO_ 2152005632 "Gateway Message";
+BA_ "VFrameFormat" BO_ 1280 0;
+BA_ "Network" BO_ 1280 "Node1,Node2";
+BA_ "Direction" BO_ 1280 "Gateway Message";
+BA_ "VFrameFormat" BO_ 2147527629 1;
+BA_ "Network" BO_ 2147527629 "Node2,Node3";
+BA_ "Direction" BO_ 2147527629 "Gateway Message";
+BA_ "VFrameFormat" BO_ 2147491875 1;
+BA_ "Network" BO_ 2147491875 "Node3,Node1";
+BA_ "Direction" BO_ 2147491875 "Don't Gateway Message";
+

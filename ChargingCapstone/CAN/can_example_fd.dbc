@@ -1,0 +1,90 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_:
+
+
+BO_ 1911 Example_FD_Message: 12 Vector__XXX
+ SG_ Enable : 0|1@0+ (1,0) [0|1] "" Vector__XXX
+ SG_ EngineSpeed : 15|16@0+ (0.1,0) [0|6500] "rpm" Vector__XXX
+ SG_ EngineTemperature : 31|16@0+ (0.01,-40) [-40|500] "degC" Vector__XXX
+ SG_ ID_Number : 48|32@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147488308 Example_FD_Msg_Extended: 16 Vector__XXX
+ SG_ Data : 7|32@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ MoreData : 40|32@1+ (0.1,0) [0|0] "" Vector__XXX
+ SG_ EvenMoreData : 80|32@1+ (0.01,-40) [0|0] "" Vector__XXX
+
+BO_ 1919 Example_FD_Msg_VeryLong: 64 Vector__XXX
+ SG_ Signal_16Bits_Unsigned_1 : 0|16@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Unsigned_2 : 16|16@1+ (0.01,0) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Unsigned_3 : 32|16@1+ (10,0) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Unsigned_4 : 48|16@1+ (1,50) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Unsigned_5 : 64|16@1+ (0.01,50) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Unsigned_6 : 80|16@1+ (10,50) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Unsigned_7 : 96|16@1+ (1,-10) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Unsigned_8 : 112|16@1+ (0.01,-10) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Unsigned_9 : 128|16@1+ (10,-10) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Signed_1 : 144|16@1- (1,0) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Signed_2 : 160|16@1- (0.01,0) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Signed_3 : 176|16@1- (10,0) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Signed_4 : 192|16@1- (1,50) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Signed_5 : 208|16@1- (0.01,50) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Signed_6 : 224|16@1- (10,50) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Signed_7 : 240|16@1- (1,-10) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Signed_8 : 256|16@1- (0.01,-10) [0|0] "" Vector__XXX
+ SG_ Signal_16Bits_Signed_9 : 272|16@1- (10,-10) [0|0] "" Vector__XXX
+ SG_ Signal_32Bits_Unsigned_1 : 288|32@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Signal_32Bits_Unsigned_2 : 320|32@1+ (0.01,-10) [0|0] "" Vector__XXX
+ SG_ Signal_32Bits_Unsigned_3 : 352|32@1+ (10,50) [0|0] "" Vector__XXX
+ SG_ Signal_32Bits_Signed_1 : 384|32@1- (1,0) [0|0] "" Vector__XXX
+ SG_ Signal_32Bits_Signed_2 : 416|32@1- (0.01,-10) [0|0] "" Vector__XXX
+ SG_ Signal_32Bits_Signed_3 : 448|32@1- (10,50) [0|0] "" Vector__XXX
+ SG_ Signal_32Bits_Float : 480|32@1- (1,0) [0|0] "" Vector__XXX
+
+
+
+BA_DEF_  "BusType" STRING ;
+BA_DEF_ BO_  "CANFD_BRS" ENUM  "0","1";
+BA_DEF_ BO_  "VFrameFormat" ENUM  "StandardCAN","ExtendedCAN","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","StandardCAN_FD","ExtendedCAN_FD";
+BA_DEF_DEF_  "BusType" "";
+BA_DEF_DEF_  "CANFD_BRS" "0";
+BA_DEF_DEF_  "VFrameFormat" "StandardCAN";
+BA_ "BusType" "CAN FD";
+BA_ "VFrameFormat" BO_ 1911 14;
+BA_ "VFrameFormat" BO_ 2147488308 15;
+BA_ "VFrameFormat" BO_ 1919 14;
+SIG_VALTYPE_ 1919 Signal_32Bits_Float : 1;
+
